@@ -4,7 +4,7 @@ export function setupCounter(element: HTMLButtonElement) {
   // Fetch the current counter value from the Netlify function
   const fetchCounter = async () => {
     try {
-      const res = await fetch('/.netlify/functions/counter');
+      const res = await fetch('/counter');
       if (!res.ok) throw new Error('Failed to fetch counter');
       const data = await res.json();
       setCounter(data.count);
@@ -16,7 +16,7 @@ export function setupCounter(element: HTMLButtonElement) {
   // Increment the counter via the Netlify function
   const incrementCounter = async () => {
     try {
-      const res = await fetch('/.netlify/functions/counter', { method: 'POST' });
+      const res = await fetch('/counter', { method: 'POST' });
       if (!res.ok) throw new Error('Failed to increment counter');
       const data = await res.json();
       setCounter(data.count);

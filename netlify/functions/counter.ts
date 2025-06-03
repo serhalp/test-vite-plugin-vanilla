@@ -20,4 +20,8 @@ export default async function (request: Request) {
   }
 
   return new Response('Method Not Allowed', { status: 405 });
-} 
+}
+
+export const config = {
+  path: '/counter',
+}
