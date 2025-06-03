@@ -5,7 +5,7 @@ export function setupCounter(element: HTMLButtonElement) {
   const fetchCounter = async () => {
     try {
       const res = await fetch('/counter');
-      if (!res.ok) throw new Error('Failed to fetch counter');
+      if (!res.ok) throw new Error(`Failed to fetch counter: ${res.status} ${await res.text()}`);
       const data = await res.json();
       setCounter(data.count);
     } catch (err) {
@@ -17,11 +17,11 @@ export function setupCounter(element: HTMLButtonElement) {
   const incrementCounter = async () => {
     try {
       const res = await fetch('/counter', { method: 'POST' });
-      if (!res.ok) throw new Error('Failed to increment counter');
+      if (!res.ok) throw new Error(`Failed to increment counter: ${res.status} ${await res.text()}`);
       const data = await res.json();
       setCounter(data.count);
     } catch (err) {
-      element.innerHTML = 'Error incrementing counter';
+      element.innerHTML = `Error incrementing counter: ${err?.toString()}`;
     }
   };
 

@@ -5,12 +5,14 @@ const COUNTER_KEY = 'counter';
 
 export default async function (request: Request) {
   if (request.method === 'GET') {
+    console.log("getting count");
     // Get the current counter value
     const value = await store.get(COUNTER_KEY, { type: 'json' });
     return Response.json({ count: value ?? 0 });
   }
 
   if (request.method === 'POST') {
+    console.log("incrementing count");
     // Increment the counter
     let value = await store.get(COUNTER_KEY, { type: 'json' });
     if (typeof value !== 'number') value = 0;
